@@ -1,7 +1,15 @@
-import numpy as np
+import torch
 
 
-a = np.arange(36).reshape((6,6))
+a = torch.arange(1., 26.).reshape(5,5)
 print(a)
-print(np.reshape(a,(18,2)))
-print(np.reshape(a,(180,2)).flatten())
+print(torch.sum(a, dim=1)/5)
+
+
+'''
+start = torch.arange(1., 5.)
+end = torch.empty(4).fill_(10)
+
+print(torch.lerp(start, end, 0.1))
+'''
+
