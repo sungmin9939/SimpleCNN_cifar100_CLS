@@ -1,4 +1,5 @@
-from sqlalchemy import false
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
 import torchvision
 import torch
 import numpy as np
@@ -16,7 +17,7 @@ transform_train = transforms.Compose([
 
 
 
-dataset = torchvision.datasets.CIFAR100('.\data',False, download=True, transform=transform_train)
+dataset = torchvision.datasets.CIFAR100('.\data',True, download=True, transform=transform_train)
 sampler = BatchSampler(dataset, 32, 4)
 dataloader = DataLoader(dataset, batch_size=32, sampler=sampler, shuffle=False)
 
@@ -24,6 +25,7 @@ model = resnet50()
 
 for idx, (img, label) in enumerate(dataloader):
     print(img.shape)
+    print(label)
     output, class_emb = model(img)
     print(output.shape)
     print(class_emb.shape)
